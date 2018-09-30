@@ -1,0 +1,9 @@
+
+.metadata/
+.recommenders/
+.git/
+target/
+.classpath
+.settings/
+.project
+.SpringBeans

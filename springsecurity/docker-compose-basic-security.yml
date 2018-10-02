@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  nosqlapp:
+    image: falcon007/springsecurity:latest
+    ports:
+      - "8083:8083"
+volumes:
+  installation:
+     external: false

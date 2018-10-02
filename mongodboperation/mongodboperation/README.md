@@ -50,7 +50,7 @@ $ docker-compose -f docker-compose-mongo.yml up
 
 Added the swagger api to detail descrition of the rest api exposed fir the application.
 The URL for the swagger documentation is:
-http://<IP Address>:<Port>/swagger-ui.html
+http://ipaddress:port/swagger-ui.html
 Example
 http://localhost:8083/swagger-ui.html
 

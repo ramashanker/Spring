@@ -46,6 +46,14 @@ $ docker-compose -f docker-compose-mongo.yml pull
 $ docker-compose -f docker-compose-mongo.yml up
 ```
 
+## Swagger 
+
+Added the swagger api to detail descrition of the rest api exposed fir the application.
+The URL for the swagger documentation is:
+http://<IP Address>:<Port>/swagger-ui.html
+Example
+http://localhost:8083/swagger-ui.html
+
 ## Testing
 
 Once the application is up and running.You can wither use post man to hit the application or curl command.

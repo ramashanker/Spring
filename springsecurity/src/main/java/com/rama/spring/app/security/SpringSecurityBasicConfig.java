@@ -12,16 +12,15 @@ public class SpringSecurityBasicConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests().antMatchers("/swagger*").permitAll()
-				.antMatchers(HttpMethod.GET, "/getdata").hasAnyRole("ADMIN", "USER")
-				.antMatchers(HttpMethod.POST, "/savedata").hasAnyRole("USER")
-				.antMatchers(HttpMethod.GET, "/name").hasAnyRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/admin-name").hasAnyRole("ADMIN", "USER")
+				.antMatchers(HttpMethod.GET, "/user-name").hasAnyRole("USER")
 				.and().csrf().disable().headers().frameOptions().disable();
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("rama123").password("{noop}password").roles("USER").and()
+		auth.inMemoryAuthentication().withUser("user123").password("{noop}password").roles("USER").and()
 				.withUser("admin123").password("{noop}password").roles("ADMIN").and()
-				.withUser("tanu123").password("{noop}password").roles("USER");
+				.withUser("test123").password("{noop}password").roles("USER");
 	}
 }

@@ -19,10 +19,12 @@ import com.rama.mongo.operation.response.FileUploadResponse;
 import com.rama.mongo.operation.response.RestResponse;
 import com.rama.mongo.operation.service.DataOperationService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
+@Api(value="Mongo DB operation controller api",description="manage mongo crud operation")
 @RestController
+@RequestMapping("/mongo")
 public class OperationController {
 	private final DataOperationService dataUploadService;
 
@@ -33,7 +35,7 @@ public class OperationController {
 	@RequestMapping(value = "entryfile", method = PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<FileUploadResponse> bulkEntryFileUpload(
-			@ApiParam(name = "dbname", value = "DB name where json files to be uploaded", required = true) @RequestParam(value = "file", required = false) MultipartFile[] filesSubmitted,
+			@ApiParam(name = "datafile", value = "json files to be uploaded", required = true) @RequestParam(value = "file", required = false) MultipartFile[] filesSubmitted,
 			@RequestParam(value = "name", required = false) String name) throws IOException {
 
 		if (filesSubmitted == null || filesSubmitted.length == 0) {

@@ -5,14 +5,23 @@ This Apllication is use understand the basic security mechanism in sprict boot a
 Import the project on either eclipse or inellij as a maven import project
 
 ## Building
+
+### Maven
 This project is maven project which will be build using maven command.
 
 ```bash
 $ mvn clean install
 ```
 
+### Gradle
+
+```bash
+$ gradle build
+```
+
 ## Dockerization
 
+### Maven
 Here i am using maven spotify plugin to create the docker image for this application.
 Use the below command to create the docker image.
 For creating please use your repository to create the image which will be easy to push image in your docker hub.
@@ -21,6 +30,25 @@ update in your pom.xml.
 
 ```bash
 $ mvn install dockerfile:build
+```
+
+### Gradle
+
+Here i am using gradle  gradle.plugin.com.palantir.gradle.docker plugin to create the docker image for this application.
+Use the below command to create the docker image.
+For creating please use your repository to create the image which will be easy to push image in your docker hub.
+update in your build.gradle group name with repository name.
+group <repository-name>
+
+```bash
+$ gradle build docker
+```
+
+### Push docker images
+
+```bash
+docker login
+$ docker push <repository-name>/springsecurity
 ```
 
 ## Running

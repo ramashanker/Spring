@@ -3,6 +3,7 @@
 .recommenders/
 .git/
 target/
+build/
 .classpath
 .settings/
 .project

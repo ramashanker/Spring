@@ -74,6 +74,18 @@ Command to start:
 $ docker-compose -f docker-compose-basic-security.yml pull
 $ docker-compose -f docker-compose-basic-security.yml up
 ```
+### Running the application using Kubernetes.
+
+```
+kubectl create -f security-application.yml
+kubectl get pods
+kubectl get deployment
+kubectl describe deployments security-deployment
+docker ps
+kubectl expose deployment security-deployment --type=LoadBalancer --name=rama-service
+kubectl get services rama-service
+kubectl describe services rama-service
+```
 
 ## Swagger 
 

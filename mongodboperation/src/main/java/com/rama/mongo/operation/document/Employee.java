@@ -24,8 +24,8 @@ public class Employee {
 	@Field(value = "Age")
 	private int age;
 
-	@Field(value = "Release_Date")
-	private Date releaseDate;
+	@Field(value = "Joinings_Date")
+	private Date joiningsDate;
 
 	// ObjectId needs to be converted to string
 	public String get_id() {
@@ -60,18 +60,18 @@ public class Employee {
 		this.age = age;
 	}
 
-	public Date getReleaseDate() {
-		return releaseDate;
+	public Date getJoiningDate() {
+		return joiningsDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setJoiningDate(Date joiningsDate) {
+		this.joiningsDate = joiningsDate;
 	}
 
 	@Override
 	public String toString() {
 		return "id:" + this._id + ", empNo: " + empNo //
-				+ ", fullName: " + this.fullName + ", Age: " + this.age + ", releaseDate: "
-				+ this.releaseDate;
+				+ ", fullName: " + this.fullName + ", Age: " + this.age + ", joiningsDate: "
+				+ this.joiningsDate;
 	}
 }

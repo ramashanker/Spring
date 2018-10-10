@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -63,8 +67,11 @@ public class DataOperationServiceImpl implements DataOperationService {
 
 	@Override
 	public Employee createData(Employee employee) {
-
 		employee.set_id(ObjectId.get());
+		if(employee.getJoiningDate()==null) {
+			Date date = new Date();
+			employee.setJoiningDate(date);
+		}
 		mongoTemplate.insert(employee);
 		return employee;
 	}

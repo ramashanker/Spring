@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.tanu.ignite</groupId>
-	<artifactId>datacache</artifactId>
+	<artifactId>ignite-datacache</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>datacache</name>
+	<name>ignite-datacache</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 	<parent>

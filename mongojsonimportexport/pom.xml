@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.rama.data.process</groupId>
-	<artifactId>nosqldataprocess</artifactId>
+	<artifactId>mongojsonimportexport</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>nosqldataprocess</name>
+	<name>mongojsonimportexport</name>
 	<description>MongoDb data import and export</description>
 
 	<properties>

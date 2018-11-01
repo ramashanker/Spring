@@ -16,7 +16,6 @@
 		<docker.image.prefix>falcon007</docker.image.prefix>
 		<java.version>1.8</java.version>
 		<swagger.version>2.7.0</swagger.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

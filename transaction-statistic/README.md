@@ -123,6 +123,13 @@ The reason for using ConcurrentNavigableMap is it contain the data in sorted ord
 
 I have used java8 statistics feature since its full fill our requirement.
 
+### Clean up data
+@Async
+	private void cleanupCache(long startingESecond) {
+		transactionCache.entrySet().removeIf(entry -> entry.getKey().compareTo(Long.valueOf(startingESecond)) <= 0);
+
+	}
+
 
 
 

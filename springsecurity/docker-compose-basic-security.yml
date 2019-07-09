@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   app:
-    image: falcon007/springsecurity:0.0.1
+    image: falcon007/spring-security:0.0.1
     ports:
       - "8080:8080"
 volumes:

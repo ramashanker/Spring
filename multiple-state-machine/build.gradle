@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+apply plugin: 'base'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+version =  '0.1.0'
+archivesBaseName = 'multiple-statemachine'
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+    maven { url "http://repo.spring.io/libs-milestone" }
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile("org.springframework.statemachine:spring-statemachine-core:1.0.0.BUILD-SNAPSHOT")
+    compile("org.springframework.boot:spring-boot-starter:1.2.5.RELEASE")
+    testCompile("org.springframework.statemachine:spring-statemachine-test:1.0.0.BUILD-SNAPSHOT")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}

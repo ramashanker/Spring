@@ -1,0 +1,10 @@
+client:
+  auth:
+    usename: user123
+    password: password
+
+user:
+  url: /user-name
+admin: 
+  url: /admin-name
+  

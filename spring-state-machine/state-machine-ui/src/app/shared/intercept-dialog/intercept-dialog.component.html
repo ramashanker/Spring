@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{message.title}}</h2>
+
+<mat-dialog-content class="message-content">
+    <h3 class="mat-h3">Header</h3>
+    <textarea [(ngModel)]="message.headerXml" style="white-space: nowrap; font-family: monospace;" rows="20" cols="100"></textarea>
+
+    <h3 class="mat-h3">Message</h3>
+    <textarea [(ngModel)]="message.messageXml" style="white-space: nowrap; font-family: monospace;" rows="20" cols="100"></textarea>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="message">Ok</button>
+</mat-dialog-actions>

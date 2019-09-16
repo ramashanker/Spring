@@ -1,0 +1,4 @@
+{
+  "name": "PROVISIONING_SERVICE",
+  "initialState": "INACTIVE"
+}

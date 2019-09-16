@@ -1,0 +1,11 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.search {
+  width: calc(100% - 32px);
+  margin-right: -32px;
+  padding: 16px;
+  border: none;
+  outline: none;
+}

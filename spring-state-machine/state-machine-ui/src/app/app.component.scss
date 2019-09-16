@@ -1,0 +1,98 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .main-content {
+    flex: 1;
+    position: relative;
+    overflow-y: scroll;
+
+    .loading-spinner {
+      position: fixed;
+      z-index: 100;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 1em;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.473);
+    }
+  }
+
+  .log-and-settings {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+
+    .resize-bar {
+      position: relative;
+      height: 5px;
+      min-height: 5px;
+      background-color: #dcdcdc;
+
+      &:hover {
+        cursor: ns-resize;
+      }
+
+      mat-icon {
+        position: absolute;
+        font-size: 0.8em;
+        margin: auto;
+        top: -3px;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      max-height: calc(100% - 5px);
+
+      .log-actions {
+        background-color: #2d2d2d;
+        color: #cacaca;
+        mat-icon {
+          display: block;
+          cursor: pointer;
+        }
+      }
+
+      .log {
+        flex: 1;
+        background-color: #131212;
+        color: #cacaca;
+        white-space: pre;
+        font-family: monospace;
+        max-height: 100%;
+        overflow-y: scroll;
+
+        div {
+          min-height: 1em;
+        }
+      }
+
+      .settings {
+        display: flex;
+        flex-direction: column;
+        background-color: #f9f9f9;
+        padding: 1em;
+
+        .main-settings {
+          flex: 1;
+        }
+
+        .shortcuts {
+          a {
+            display: block;
+            margin-bottom: 1em;
+
+            &:last-of-type {
+              margin-bottom: 10;
+            }
+          }
+        }
+      }
+    }
+  }
+}

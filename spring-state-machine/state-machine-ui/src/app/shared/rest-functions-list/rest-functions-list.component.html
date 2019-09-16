@@ -1,0 +1,8 @@
+<div class="container">
+  <table class="rest-functions-list">
+    <tr *ngFor="let restFunction of restFunctions">
+      <td><button mat-raised-button big color="primary" (click)="restFunction.onClick()">{{restFunction.buttonLabel}}</button></td>
+      <td [innerHTML]="restFunction.description"></td>
+    </tr>
+  </table>
+</div>

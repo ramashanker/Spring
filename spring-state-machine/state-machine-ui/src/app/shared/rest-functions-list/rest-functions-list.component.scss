@@ -1,0 +1,22 @@
+.rest-functions-list {
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  color: #4e4e4e;
+
+  tr {
+    border-bottom: 1px solid #dcdcdc;
+
+    &:last-of-type {
+      border-bottom: initial;
+    }
+
+    td {
+      padding: 1em;
+      vertical-align: top;
+
+      &:last-of-type {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<div class="main-container">
+  <div class="main-content">
+     <app-navigation></app-navigation>
+
+    <router-outlet></router-outlet>
+
+  <div [hidden]="!loadingService.loading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+  <div class="state-machine" #stateMachine>
+      <div class="resize-bar" (mousedown)="startResize($event)" (window:mousemove)="onResize($event)"
+          (window:mouseup)="stopResize()">
+          <mat-icon>drag_handle</mat-icon>
+      </div>
+      <div class="state" #state>
+        <div *ngFor="let stateData of states">{{stateData}}</div>
+      </div>
+  </div>
+ 
+
+  <div class="log-and-settings" #logAndSettings>
+    <div class="resize-bar" (mousedown)="startResize($event)" (window:mousemove)="onResize($event)"
+         (window:mouseup)="stopResize()">
+      <mat-icon>drag_handle</mat-icon>
+    </div>
+
+    <div class="content">
+      <div class="log-actions">
+          <mat-icon (click)="scrollLogToTop()">vertical_align_top</mat-icon>
+          <mat-icon (click)="scrollLogToBottom()">vertical_align_bottom</mat-icon>
+          <mat-icon (click)="deleteAllLogRows()">delete</mat-icon>
+          <select id="selectid" class="form-control-mb-12" (change)="displayLogLevel($event.target.value)">
+            <option value="all">All</option>
+            <option value="info">Info</option>
+            <option value="debug">Debug</option>
+            <option value="error">Error</option>
+          </select>
+      </div>
+      <!-- <div class="log" #log>
+          <div *ngFor="let logRow of logRows">{{logRow}}</div>
+        </div> -->
+       <div class="log" #log>
+           <div *ngIf="logLevel==='all'" >
+           <ul>
+              <li *ngFor="let logRow of logRows"> {{logRow}}</li>
+            </ul>
+          </div>
+
+          <div *ngIf="logLevel==='debug'">
+              <ul>
+                 <li *ngFor="let debugLogRow of debugLogRows"> {{debugLogRow}}</li>
+               </ul>
+           </div>
+
+           <div *ngIf="logLevel==='info'" >
+           <ul>
+              <li *ngFor="let infoLogRow of infoLogRows"> {{infoLogRow}}</li>
+            </ul>
+          </div>      
+          
+           <div *ngIf="logLevel==='error'">
+           <ul>
+              <li *ngFor="let errorLogRow of errorLogRows"> {{errorLogRow}}</li>
+            </ul>
+          </div>
+      </div>
+      <div class="settings">
+        <div class="main-settings">
+            <h2 class="mat-h2">Settings</h2>
+        </div>
+        <div class="shortcuts">
+          <a mat-raised-button color="primary" href="/swagger-ui.html" target="_blank">Open REST API in Swagger UI</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

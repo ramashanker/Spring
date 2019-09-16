@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <button mat-button *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive="mat-flat-button">{{link.label}}</button>
+
+  <span class="fill-remaining-space"></span>
+
+  <!-- <mat-form-field style="font-size: 0.7em;">
+    <mat-select [(ngModel)]="selectedCar" (selectionChange)="selectedCarUpdated()" (openedChange)="selectedCarOpenedChange($event)">
+      <input [(ngModel)]="searchText" class="search" placeholder="Search..." #searchInput>
+
+      <mat-option *ngFor="let car of cars | filter : searchText" [value]="car">{{car}}</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+</mat-toolbar>

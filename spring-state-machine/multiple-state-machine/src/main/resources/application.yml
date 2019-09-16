@@ -1,0 +1,11 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: password
+  application:
+    name: spring-state-machine
+server:
+  port: 8090
+logging:
+  file: ${java.io.tmpdir}/statemachine.log

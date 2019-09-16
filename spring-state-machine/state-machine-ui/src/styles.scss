@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+[hidden] {
+  display: none !important;
+}
+
+button[big] {
+  width: 100%;
+  padding: 1em 2em;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3em auto;
+}
+
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3em auto;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    tr {
+      border-bottom: 1px solid #dcdcdc;
+
+      th {
+        font-weight: 500;
+        font-size: 0.8em;
+        opacity: 0.5;
+      }
+
+      th, td {
+        padding: 12px;
+        vertical-align: top;
+        text-align: left;
+        white-space: nowrap;
+
+        &:nth-of-type(2) {
+          width: 100%;
+          white-space: normal;
+        }
+      }
+    }
+  }
+}
+
+#graph {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.snackbar {
+  &.good {
+    background-color: #4CAF50;
+  }
+
+  &.bad {
+    background-color: #F44336;
+  }
+}

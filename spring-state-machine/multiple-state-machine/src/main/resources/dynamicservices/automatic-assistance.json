@@ -1,0 +1,4 @@
+{
+  "name": "ASSISTANCE_SERVICE",
+  "initialState": "INACTIVE"
+}

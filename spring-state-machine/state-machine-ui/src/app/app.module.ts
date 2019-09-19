@@ -1,5 +1,5 @@
 import{BrowserModule}from'@angular/platform-browser';
-import {NgModule }from '@angular/core';
+import {NgModule,CUSTOM_ELEMENTS_SCHEMA }from '@angular/core';
 import {AppRoutingModule}from './app-routing.module';
 import {AppComponent}from './app.component';
 import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
@@ -25,6 +25,8 @@ import {InterceptDialogComponent}from './shared/intercept-dialog/intercept-dialo
 import {DynamicServicesComponent}from './pages/dynamic-services/dynamic-services.component';
 import {DynamicServiceComponent}from './pages/dynamic-services/dynamic-service/dynamic-service.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
 declarations: [
@@ -53,7 +55,9 @@ MatSnackBarModule,
 MatDialogModule,
 MatExpansionModule,
 MatCheckboxModule,
-MatCardModule
+MatCardModule,
+NgxGraphModule,
+NgxChartsModule
 ],
 providers: [
 {
@@ -71,6 +75,7 @@ useFactory: rxStompServiceFactory,
 deps: [InjectableRxStompConfig]
 }
 ],
+schemas: [CUSTOM_ELEMENTS_SCHEMA],
 bootstrap: [AppComponent],
 entryComponents: [HttpErrorDialogComponent, InterceptDialogComponent]
 })

@@ -5,6 +5,8 @@ import {LoadingService}from './services/visuals/loading.service';
 import {RxStompService}from '@stomp/ng2-stompjs';
 import {Subscription}from 'rxjs';
 import {ResourcesService}from 'src/app/services/resources.service';
+import * as shape from 'd3-shape';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
 
 @Component({
 selector: 'app-root',
@@ -12,7 +14,8 @@ templateUrl: './app.component.html',
 styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
+  hierarchialGraph = {nodes: [], links: []}
+  curve = shape.curveBundle.beta(1);
 @ViewChild('logAndSettings') logAndSettings: ElementRef;
 @ViewChild('log') log: ElementRef;
 
@@ -28,7 +31,7 @@ logRows = [];
 infoLogRows = [];
 debugLogRows = [];
 errorLogRows = [];
-states = [];
+states = 'SUCCESS';
 
 interceptOutgoingMessagesCheckbox = false;
 interceptIncomingMessagesCheckbox = false;
@@ -43,9 +46,9 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
   ngOnInit(): void {
     this.logLevel= 'all';
     this.rxStompService.watch('/topic/state').subscribe(message => {
-      this.states = this.states.concat(message.body);
+      this.states = message.body; 
+      this.showGraph(this.states);
     });
-
     this.rxStompService.watch('/topic/log-rows').subscribe(message => {
       this.shouldScrollLogToBottom = this.state.nativeElement.scrollHeight - this.state.nativeElement.scrollTop - this.state.nativeElement.clientHeight <= 100;
       this.logRows = this.logRows.concat(JSON.parse(message.body));
@@ -141,6 +144,37 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
 
   stopResize() {
     this.isResizing = false;
+  }
+
+  showGraph(value: string) {
+    this.hierarchialGraph.nodes = [
+  {
+    id: 'start',
+    label: 'Start',
+    position: 'x0'
+  }, {
+    id: '1',
+    label: value,
+    position: 'x1'
+  }, {
+    id: '2',
+    label: 'Success',
+    position: 'x2'
+  }
+  ];
+
+  this.hierarchialGraph.links = [
+  {
+    source: 'start',
+    target: '1',
+    label: 'Process#1'
+  }, {
+    source: 'start',
+    target: '2',
+    label: 'Process#2'
+  }
+  ];
+
   }
 
 }

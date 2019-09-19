@@ -6,6 +6,6 @@ spring:
   application:
     name: spring-state-machine
 server:
-  port: 8090
+  port: 8091
 logging:
   file: ${java.io.tmpdir}/statemachine.log

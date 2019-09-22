@@ -29,10 +29,6 @@ constructor(private route: ActivatedRoute, private rxStompService: RxStompServic
   }
 
   initiate() {
-    if (this.stateMachineGraphSubscription) {
-      this.stateMachineGraphSubscription.unsubscribe();
-    }
-
     if (this.service) {
       this.dynamicServiceService.getDynamicServiceSpecification(this.service).subscribe(dynamicServiceSpecification => {
         this.restFunctions = Object.entries(dynamicServiceSpecification.exposedEventTriggers).map(([name, exposedEventTrigger]) => {

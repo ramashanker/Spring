@@ -1,4 +1,3 @@
 {
-  "name": "ASSISTANCE_SERVICE",
-  "initialState": "INACTIVE"
+  "name": "ASSISTANCE_SERVICE"
 }

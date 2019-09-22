@@ -7,6 +7,7 @@ import {Subscription}from 'rxjs';
 import {ResourcesService}from 'src/app/services/resources.service';
 import * as shape from 'd3-shape';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { StateMachineDataModel } from './models/statemachine-data-model';
 
 @Component({
 selector: 'app-root',
@@ -18,8 +19,6 @@ export class AppComponent implements OnInit {
   curve = shape.curveBundle.beta(1);
 @ViewChild('logAndSettings') logAndSettings: ElementRef;
 @ViewChild('log') log: ElementRef;
-
-@ViewChild('stateMachine') stateMachine: ElementRef;
 @ViewChild('state') state: ElementRef;
 
 isResizing = false;
@@ -45,12 +44,13 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
 
   ngOnInit(): void {
     this.logLevel= 'all';
-    this.rxStompService.watch('/topic/state').subscribe(message => {
-      this.states = message.body; 
-      this.showGraph(this.states);
-    });
+      this.rxStompService.watch('/topic/state').subscribe(message => {
+       let jsonObj: any = JSON.parse(message.body); 
+       let data: StateMachineDataModel = <StateMachineDataModel>jsonObj
+       this.showGraph(data);
+     });
     this.rxStompService.watch('/topic/log-rows').subscribe(message => {
-      this.shouldScrollLogToBottom = this.state.nativeElement.scrollHeight - this.state.nativeElement.scrollTop - this.state.nativeElement.clientHeight <= 100;
+      this.shouldScrollLogToBottom = this.log.nativeElement.scrollHeight - this.log.nativeElement.scrollTop - this.log.nativeElement.clientHeight <= 100;
       this.logRows = this.logRows.concat(JSON.parse(message.body));
     });
 
@@ -146,32 +146,23 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
     this.isResizing = false;
   }
 
-  showGraph(value: string) {
+  showGraph(data: StateMachineDataModel) {
     this.hierarchialGraph.nodes = [
   {
-    id: 'start',
-    label: 'Start',
+    id: '0',
+    label: data.source,
     position: 'x0'
   }, {
     id: '1',
-    label: value,
+    label: data.target,
     position: 'x1'
-  }, {
-    id: '2',
-    label: 'Success',
-    position: 'x2'
   }
   ];
-
   this.hierarchialGraph.links = [
   {
-    source: 'start',
+    source: '0',
     target: '1',
-    label: 'Process#1'
-  }, {
-    source: 'start',
-    target: '2',
-    label: 'Process#2'
+    label: data.event,
   }
   ];
 

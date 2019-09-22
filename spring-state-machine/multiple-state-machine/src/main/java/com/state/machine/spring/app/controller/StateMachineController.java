@@ -52,6 +52,8 @@ public class StateMachineController {
          assistanceCallStateMachine.start();
          LOGGER.info("Assistance Call:MESSAGE_SENT");
          assistanceCallStateMachine.sendEvent(AssistanceEvents.MESSAGE_SENT);  
+         Thread.sleep(10000);
+         assistanceCallStateMachine.sendEvent(AssistanceEvents.POSITIVE_EOS_ACK_RECEVIED);  
          return assistanceCallStateMachine.getState().getId().name();
     }
 

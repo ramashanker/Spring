@@ -16,10 +16,7 @@ constructor(private httpClient: HttpClient, private resourcesService: ResourcesS
     return this.httpClient.get<DynamicServiceSpecification>(`${AppConstants.API_ENDPOINT}/dynamic-service/${service}/dynamic-service-specification`);
   }
 
-  getStateMachineGraph(service: string): Observable<string> {
-    return this.httpClient.get(`${AppConstants.API_ENDPOINT}/dynamic-service/${service}/state-machine-graph`, {responseType: 'text'});
-  }
-
+ 
   triggerExposedEvent(service: string, name: string) {
     return this.httpClient.post(`${AppConstants.API_ENDPOINT}/dynamic-service/${service}/trigger-exposed-event`, name).subscribe();
   }

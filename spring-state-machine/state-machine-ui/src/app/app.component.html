@@ -30,7 +30,7 @@
     [tooltipType]="'tooltip'"
     [tooltipTitle]="node.position"
     >
-      <svg:rect [attr.width]="node.width" [attr.height]="node.height"/>
+      <svg:rect [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.data.color" />
       <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.height / 2">{{node.label}}</svg:text>
     </svg:g>
   </ng-template>

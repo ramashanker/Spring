@@ -1,6 +1,5 @@
 package com.state.machine.spring.app.statemachine;
 
-import com.state.machine.spring.app.websocket.WebSocketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.Message;
@@ -11,6 +10,9 @@ import org.springframework.statemachine.listener.StateMachineListener;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.persist.StateMachineRuntimePersister;
 import org.springframework.statemachine.state.State;
+
+import com.state.machine.spring.app.util.StateMachineData;
+import com.state.machine.spring.app.websocket.WebSocketService;
 
 public abstract class AbstractServiceStateMachine<S, E, T extends String> {
     protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -62,27 +64,36 @@ public abstract class AbstractServiceStateMachine<S, E, T extends String> {
     }
 
     protected StateMachineListener<S, E> createListener() {
+    	
         return new StateMachineListenerAdapter<S, E>() {
             @Override
             public void eventNotAccepted(Message<E> event) {
                 LOGGER.error("Event not accepted: {}", event.getPayload());
             }
+            
+            
             @Override
             public void stateChanged(State<S, E> from, State<S, E> to) {
-            	if(from!=null )
-                    LOGGER.info("State change from: "+ from.getId() +" to: " + to.getId());
-            	else
-                    LOGGER.info("State change to: " + to.getId());
-                WebSocketService.sendObject(to.getId().toString(), "/topic/state");
+            	if(from!=null ) {
+            		LOGGER.info("State change from: "+ from.getId() +" to: " + to.getId());
+            	}
+                    
+            	else {
+            		  LOGGER.info("State change to: " + to.getId());
+            		  from= to ;
+            	}
+                  
+            	StateMachineData statemachineData= new StateMachineData();
+            	statemachineData.setSource(from.getId().toString());
+            	statemachineData.setTarget(to.getId().toString());
+            	statemachineData.setEvent("static");	
+            	WebSocketService.sendObject(statemachineData, "/topic/state");
             }
 
         };
     }
 
-    private String getStateShape(String to){
-        return String.format("digraph \"%s\" {\n" + "    rankdir = TB\n" + "    \n" + "    \"qi\" [shape = point]\n" + "    node [shape = record, style = filled, fillcolor = \"#F2F2F2\"]\n" + "    \n" + "%s\n" + "    \n" + "    \"qi\" -> \"%s\"\n" + "%s\n\n" + "    \"%s\" [shape = record, style = filled, fillcolor = \"#BBFFBB\"]\n" + "}",
-                      to);
-    }
+   
 }
 
 

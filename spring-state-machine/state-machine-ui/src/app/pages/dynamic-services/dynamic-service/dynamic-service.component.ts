@@ -26,18 +26,14 @@ constructor(private route: ActivatedRoute, private rxStompService: RxStompServic
     this.route.paramMap.subscribe(paramMap => {
       this.service = paramMap.get('service');
     });
-
-    this.resourcesService.selectedCar$.subscribe(selectedCar => {
-      this.initiate(selectedCar);
-    });
   }
 
-  initiate(selectedCar: string) {
+  initiate() {
     if (this.stateMachineGraphSubscription) {
       this.stateMachineGraphSubscription.unsubscribe();
     }
 
-    if (selectedCar && this.service) {
+    if (this.service) {
       this.dynamicServiceService.getDynamicServiceSpecification(this.service).subscribe(dynamicServiceSpecification => {
         this.restFunctions = Object.entries(dynamicServiceSpecification.exposedEventTriggers).map(([name, exposedEventTrigger]) => {
           return {
@@ -53,12 +49,8 @@ constructor(private route: ActivatedRoute, private rxStompService: RxStompServic
       document.querySelector('#graph > div').remove();
       document.querySelector('#graph').appendChild(document.createElement('div'));
 
-      this.stateMachineGraphSubscription = this.rxStompService.watch(`/topic/dynamic-service/${this.service}/${selectedCar}/state-machine-graph`).subscribe(message => {
+      this.stateMachineGraphSubscription = this.rxStompService.watch(`/topic/dynamic-service/state-machine-graph`).subscribe(message => {
         this.renderStateMachineGraph(message.body);
-      });
-
-      this.dynamicServiceService.getStateMachineGraph(this.service).subscribe(stateMachineGraph => {
-        this.renderStateMachineGraph(stateMachineGraph);
       });
     }
   }

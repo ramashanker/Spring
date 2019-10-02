@@ -1,25 +1,25 @@
 package com.state.machine.spring.app.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.state.machine.spring.app.service.DynamicService;
-import com.state.machine.spring.app.service.DynamicServiceSpecification;
+import static com.state.machine.spring.app.exception.ExceptionHandling.handleException;
+
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import static com.state.machine.spring.app.exception.ExceptionHandling.handleException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.state.machine.spring.app.service.DynamicServiceSpecification;
 
 @Repository
 public class DynamicServiceRepository {
 
-    private Map<String, DynamicService> dynamicServices = new HashMap<>();
+    private List<DynamicServiceSpecification> dynamicServices = new ArrayList<DynamicServiceSpecification>();
 
     @PostConstruct
     public void postConstruct() {
@@ -35,16 +35,11 @@ public class DynamicServiceRepository {
     }
 
     public void addDynamicService(DynamicServiceSpecification dynamicServiceSpecification) {
-        DynamicService dynamicService = new DynamicService(this, dynamicServiceSpecification);
-
-        dynamicServices.put(dynamicServiceSpecification.getName(), dynamicService);
+        dynamicServices.add(dynamicServiceSpecification);
     }
 
-    public DynamicService getDynamicService(String name) {
-        return dynamicServices.get(name);
-    }
 
-    public Set<String> getAvailableDynamicServices() {
-        return dynamicServices.keySet();
+    public List<DynamicServiceSpecification> getAvailableDynamicServices() {
+        return dynamicServices;
     }
 }

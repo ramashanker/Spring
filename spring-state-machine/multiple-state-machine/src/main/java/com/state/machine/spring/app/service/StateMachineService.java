@@ -43,12 +43,12 @@ public class StateMachineService {
                  "1234");
          assistanceCallStateMachine.start();
          LOGGER.info("Assistance Call:MESSAGE_SENT");
-         assistanceCallStateMachine.sendEvent(AssistanceEvents.MESSAGE_SENT);
+         assistanceCallStateMachine.sendEvent(AssistanceEvents.MESSAGE_SENT_EVENT);
          StateMachine<ProvisionStates, ProvisionEvents> provisionCallStateMachine = provisionServiceStateMachine.getStateMachine(provisionServiceTimeout,
                  "1235");
          provisionCallStateMachine.start();
          LOGGER.info("Provision Call:SENT_CONFIGURATION_REQUEST_MESSAGE");
-         provisionCallStateMachine.sendEvent(ProvisionEvents.SENT_CONFIGURATION_REQUEST_MESSAGE);
+         provisionCallStateMachine.sendEvent(ProvisionEvents.SENT_CONFIGURATION_MESSAGE_EVENT);
         
     }
 

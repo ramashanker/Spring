@@ -1,6 +1,7 @@
 import { ResourcesService } from 'src/app/services/resources.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DynamicServiceSpecification } from 'src/app/models/dynamic-service-specification';
 
 @Component({
   selector: 'app-dynamic-services',
@@ -9,14 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DynamicServicesComponent implements OnInit {
 
-  navLinks: { path: string, label: string }[];
+  navLinks: { path: DynamicServiceSpecification, label: string }[];
 
   constructor(private route: ActivatedRoute, private router: Router, private resourcesService: ResourcesService) { }
 
   ngOnInit() {
     this.resourcesService.getAvailableDynamicServices().subscribe(dynamicServices => {
       this.navLinks = dynamicServices.map(dynamicService => {
-        return { path: dynamicService, label: dynamicService.toLowerCase().split('_').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ') };
+        return { path: dynamicService, label: dynamicService.name.toLowerCase().split('_').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ') };
       });
 
       if (!this.route.firstChild && this.navLinks.length > 0) {
@@ -24,5 +25,4 @@ export class DynamicServicesComponent implements OnInit {
       }
     });
   }
-
 }

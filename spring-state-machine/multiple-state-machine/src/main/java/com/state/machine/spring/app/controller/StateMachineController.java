@@ -51,9 +51,9 @@ public class StateMachineController {
                  "1234");
          assistanceCallStateMachine.start();
          LOGGER.info("Assistance Call:MESSAGE_SENT");
-         assistanceCallStateMachine.sendEvent(AssistanceEvents.MESSAGE_SENT);  
+         assistanceCallStateMachine.sendEvent(AssistanceEvents.MESSAGE_SENT_EVENT);  
          Thread.sleep(10000);
-         assistanceCallStateMachine.sendEvent(AssistanceEvents.POSITIVE_EOS_ACK_RECEVIED);  
+         assistanceCallStateMachine.sendEvent(AssistanceEvents.POSITIVE_EOS_ACK_RECEVIED_EVENT);  
          return assistanceCallStateMachine.getState().getId().name();
     }
 
@@ -64,7 +64,7 @@ public class StateMachineController {
                 "1235");
     	provisionCallStateMachine.start();
         LOGGER.info("Provision Call:SENT_CONFIGURATION_REQUEST_MESSAGE");
-        provisionCallStateMachine.sendEvent(ProvisionEvents.SENT_CONFIGURATION_REQUEST_MESSAGE);
+        provisionCallStateMachine.sendEvent(ProvisionEvents.SENT_CONFIGURATION_MESSAGE_EVENT);
         return provisionCallStateMachine.getState().getId().name();
     }
 }

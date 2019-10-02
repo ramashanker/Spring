@@ -1,3 +1,4 @@
 {
-  "name": "PROVISIONING_SERVICE"
+  "name": "PROVISIONING_SERVICE",
+  "urls":[ "/start/{vehicleMsisdn}", "/status/{vehicleMsisdn}" ]
 }

@@ -6,7 +6,6 @@
     flex: 1;
     position: relative;
     overflow-y: scroll;
-
     .loading-spinner {
       position: fixed;
       z-index: 100;
@@ -28,7 +27,7 @@
       position: relative;
       height: 5px;
       min-height: 5px;
-      background-color: #dcdcdc;
+      background-color: #faf3f3;
 
       &:hover {
         cursor: ns-resize;
@@ -50,8 +49,8 @@
       max-height: calc(100% - 5px);
 
       .log-actions {
-        background-color: #2d2d2d;
-        color: #cacaca;
+        background-color: #1f1e1e;
+        color: #e2d2d2;
         mat-icon {
           display: block;
           cursor: pointer;
@@ -60,7 +59,7 @@
 
       .log {
         flex: 1;
-        background-color: #131212;
+        background-color: #0f0f0f;
         color: #cacaca;
         white-space: pre;
         font-family: monospace;
@@ -75,7 +74,7 @@
       .settings {
         display: flex;
         flex-direction: column;
-        background-color: #f9f9f9;
+        background-color: #f9f9f973;
         padding: 1em;
 
         .main-settings {
@@ -86,7 +85,8 @@
           a {
             display: block;
             margin-bottom: 1em;
-
+            background-color: #89bf04;
+            color: #080808;
             &:last-of-type {
               margin-bottom: 10;
             }
@@ -102,12 +102,12 @@
       -ms-user-select: none;
           user-select: none; }
   .graph .edge {
-    stroke: #666;
+    stroke: rgb(24, 20, 20);
     fill: none; }
     .graph .edge .edge-label {
       stroke: none;
       font-size: 12px;
-      fill: #666; }
+      fill: rgb(17, 14, 14); }
   .graph .panning-rect {
     fill: transparent;
     cursor: move; }
@@ -118,12 +118,12 @@
       -ms-user-select: none;
           user-select: none; }
   .graph .edge {
-    stroke: #666;
+    stroke: rgb(12, 9, 9);
     fill: none; }
     .graph .edge .edge-label {
       stroke: none;
       font-size: 12px;
-      fill: #666; }
+      fill: rgb(19, 16, 16); }
   .graph .panning-rect {
     fill: transparent;
     cursor: move; }
@@ -132,6 +132,6 @@
 
 .edge {
     path  {
-      stroke: #666 !important;
+      stroke: rgb(14, 12, 12) !important;
     }
   }

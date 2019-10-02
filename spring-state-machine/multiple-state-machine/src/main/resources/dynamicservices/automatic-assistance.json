@@ -1,3 +1,5 @@
 {
-  "name": "ASSISTANCE_SERVICE"
+  "name": "ASSISTANCE_SERVICE",
+   "urls":[ "/init/{vehicleMsisdn}", "/active/{vehicleMsisdn}", "/displaytext/{vehicleMsisdn}" ]
+  
 }

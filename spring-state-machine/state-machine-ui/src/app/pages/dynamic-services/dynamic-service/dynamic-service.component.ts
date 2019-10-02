@@ -31,33 +31,15 @@ constructor(private route: ActivatedRoute, private rxStompService: RxStompServic
   initiate() {
     if (this.service) {
       this.dynamicServiceService.getDynamicServiceSpecification(this.service).subscribe(dynamicServiceSpecification => {
-        this.restFunctions = Object.entries(dynamicServiceSpecification.exposedEventTriggers).map(([name, exposedEventTrigger]) => {
+        this.restFunctions = Object.entries(dynamicServiceSpecification.name).map(([name, urls]) => {
           return {
             onClick: () => this.dynamicServiceService.triggerExposedEvent(this.service, name),
-            buttonLabel: exposedEventTrigger.buttonLabel,
-            description: exposedEventTrigger.description
+            buttonLabel:name,
+            description: urls
           };
         });
       });
-
-      // #################
-
-      document.querySelector('#graph > div').remove();
-      document.querySelector('#graph').appendChild(document.createElement('div'));
-
-      this.stateMachineGraphSubscription = this.rxStompService.watch(`/topic/dynamic-service/state-machine-graph`).subscribe(message => {
-        this.renderStateMachineGraph(message.body);
-      });
     }
-  }
-
-  renderStateMachineGraph(stateMachineGraph: string) {
-    d3.graphviz('#graph > div').renderDot(stateMachineGraph);
-  }
-
-  @HostListener('window:showStateMachineState', ['$event.detail'])
-  showStateMachineState(detail) {
-    console.log(atob(detail));
   }
 
 }

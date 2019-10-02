@@ -8,6 +8,8 @@ import {ResourcesService}from 'src/app/services/resources.service';
 import * as shape from 'd3-shape';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { StateMachineDataModel } from './models/statemachine-data-model';
+import { GraphNode } from './models/graph-node';
+import { GraphLink } from './models/graph-link';
 
 @Component({
 selector: 'app-root',
@@ -30,7 +32,11 @@ logRows = [];
 infoLogRows = [];
 debugLogRows = [];
 errorLogRows = [];
-states = 'SUCCESS';
+graphNodes: Array<GraphNode> = [];
+graphLinks: Array<GraphLink> = [];
+
+graphNodeos= [];
+graphLinkos= [];
 
 interceptOutgoingMessagesCheckbox = false;
 interceptIncomingMessagesCheckbox = false;
@@ -45,9 +51,12 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
   ngOnInit(): void {
     this.logLevel= 'all';
       this.rxStompService.watch('/topic/state').subscribe(message => {
-       let jsonObj: any = JSON.parse(message.body); 
-       let data: StateMachineDataModel = <StateMachineDataModel>jsonObj
-       this.showGraph(data);
+      //  let jsonObj: any = JSON.parse(message.body); 
+      //  let data: StateMachineDataModel = <StateMachineDataModel>jsonObj
+      let statusData: any =  JSON.parse(message.body);
+      let data: StateMachineDataModel[] = <StateMachineDataModel[]>statusData;
+      this.populateNodeAndLink(data);
+      this.displayGraph(data);
      });
     this.rxStompService.watch('/topic/log-rows').subscribe(message => {
       this.shouldScrollLogToBottom = this.log.nativeElement.scrollHeight - this.log.nativeElement.scrollTop - this.log.nativeElement.clientHeight <= 100;
@@ -146,26 +155,76 @@ constructor(private renderer: Renderer2, public loadingService: LoadingService, 
     this.isResizing = false;
   }
 
-  showGraph(data: StateMachineDataModel) {
-    this.hierarchialGraph.nodes = [
-  {
-    id: '0',
-    label: data.source,
-    position: 'x0'
-  }, {
-    id: '1',
-    label: data.target,
-    position: 'x1'
-  }
-  ];
-  this.hierarchialGraph.links = [
-  {
-    source: '0',
-    target: '1',
-    label: data.event,
-  }
-  ];
+  // displayGraph(data:  StateMachineDataModel[] ) {
+  //   let index = 0;
+  //   // for (let entry of data) {
+  //   //   let nextIndex= index+1;
+  //     this.hierarchialGraph.nodes = [
+  //      {
+  //     //       id: '0',
+  //     //       label: data[0].source,
+  //     //       position: 'x0'
+  //     // }, {
+  //     //       id: '1',
+  //     //       label: data[0].target,
+  //     //       position: 'x1'
+  //     // }
+  //     this.graphNodes
+  //   ];
+  //     this.hierarchialGraph.links = [
+  //     {
+  //       source:  '0',
+  //       target:  '1',
+  //       label: data[0].event,
+  //     }
+  //   ];
+  //   // index++;
+  //   // }
+  // }
 
+  displayGraph(data:  StateMachineDataModel[] ) {
+      this.hierarchialGraph.nodes =  this.graphNodeos;
+      this.hierarchialGraph.links = this.graphLinkos;
   }
+
+//   populateNodeAndLink(data:  StateMachineDataModel[]) {
+//     let index = 0;
+//     let nextIndex=1;
+//     for (let entry of data) {
+
+//       let node = new GraphNode();
+//       node.id=`${index}`;
+//       node.label=entry.source;
+//       node.position=`x${index}`;
+
+//       let link= new GraphLink();
+//       link.source=`${index}`;
+//       link.target=`${nextIndex}`;
+//       link.label=entry.event;
+     
+//       // let node = {id:`${index}`, label: entry.source, position: `x${index}`};
+//       // let link=  {source: `${index}`, target: `${nextIndex}`, label: entry.event};
+//       this.graphNodes.push(node);
+//       this.graphLinks.push(link);
+//   }
+// }
+
+populateNodeAndLink(data:  StateMachineDataModel[]) {
+  let srcindex = 0;
+  let dstIndex=1;
+  this.graphNodeos=[];
+  this.graphLinkos=[];
+  for (let entry of data) {
+    let nodesrc = {id:`${srcindex}`, label: entry.source, position: `x${srcindex}`};
+    let nodedest = {id:`${dstIndex}`, label: entry.target, position: `x${dstIndex}`};
+    let link=  {source: `${srcindex}`, target: `${dstIndex}`, label: entry.event};
+    this.graphNodeos.push(nodesrc);
+    this.graphNodeos.push(nodedest);
+    this.graphLinkos.push(link);
+    srcindex++;
+    dstIndex++;
+  }
+}
+  
 
 }

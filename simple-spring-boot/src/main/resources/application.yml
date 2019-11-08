@@ -1,2 +1,7 @@
 server:
    port: 8081
+
+truststore.file.path: keystore/e1/truststore.jks
+truststore.password: fastdata
+client.file.path: keystore/e1/truststore.jks
+client.password: fastdata

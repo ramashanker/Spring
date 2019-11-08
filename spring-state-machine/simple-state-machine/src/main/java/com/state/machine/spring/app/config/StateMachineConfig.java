@@ -16,38 +16,41 @@ import org.springframework.statemachine.state.State;
 import com.state.machine.spring.app.util.Events;
 import com.state.machine.spring.app.util.States;
 
+/*
 @Configuration
 @EnableStateMachine
-public class StateMachineConfig
-        extends EnumStateMachineConfigurerAdapter<States, Events> {
+public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
 
     @Override
-    public void configure(StateMachineConfigurationConfigurer<States, Events> config)
-            throws Exception {
-        config
-            .withConfiguration()
-                .autoStartup(true)
-                .listener(listener());
+    public void configure(StateMachineConfigurationConfigurer<States, Events> config) throws Exception {
+        config.withConfiguration()
+              .autoStartup(true)
+              .listener(listener());
     }
 
     @Override
-    public void configure(StateMachineStateConfigurer<States, Events> states)
-            throws Exception {
-        states
-            .withStates()
-                .initial(States.SI)
-                    .states(EnumSet.allOf(States.class));
+    public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
+        states.withStates()
+              .initial(States.SUCCESSFUL)
+              .states(EnumSet.allOf(States.class));
     }
 
     @Override
-    public void configure(StateMachineTransitionConfigurer<States, Events> transitions)
-            throws Exception {
-        transitions
-            .withExternal()
-                .source(States.SI).target(States.S1).event(Events.E1)
-                .and()
-            .withExternal()
-                .source(States.S1).target(States.S2).event(Events.E2);
+    public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {
+        transitions.withExternal()
+                   .source(States.SUCCESSFUL)
+                   .target(States.WAITING_FOR_CONFIGURATION_DATA_MESSAGE)
+                   .event(Events.SENT_CONFIGURATION_REQUEST_MESSAGE)
+                   .and()
+                   .withExternal()
+                   .source(States.WAITING_FOR_CONFIGURATION_DATA_MESSAGE)
+                   .target(States.SUCCESSFUL)
+                   .event(Events.RECEIVED_CONFIGURATION_DATA_MESSAGE)
+                   .and()
+                   .withExternal()
+                   .source(States.WAITING_FOR_CONFIGURATION_DATA_MESSAGE)
+                   .target(States.TIMED_OUT)
+                   .timerOnce(30000);
     }
 
     @Bean
@@ -59,4 +62,4 @@ public class StateMachineConfig
             }
         };
     }
-}
+}*/

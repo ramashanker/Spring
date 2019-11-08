@@ -1,5 +1,5 @@
 package com.state.machine.spring.app.util;
 
 public enum States {
-    SI, S1, S2
+    SUCCESSFUL, WAITING_FOR_CONFIGURATION_DATA_MESSAGE,TIMED_OUT,WAITING_FOR_ACK,FAILED
 }

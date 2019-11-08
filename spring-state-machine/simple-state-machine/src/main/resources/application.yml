@@ -12,4 +12,4 @@ spring:
   application:
     name: spring-security
 server:
-  port: 8090
+  port: 8091

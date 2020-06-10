@@ -3,7 +3,7 @@ services:
   artemis:
     image: vromero/activemq-artemis:latest
     ports:
-      - "61616:61616"
+      - "61618:61616"
     
     environment:
       ARTEMIS_USERNAME: admin

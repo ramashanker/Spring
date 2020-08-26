@@ -32,7 +32,7 @@ public class ArtemisConfig {
         activeMQConnectionFactory.setBrokerURL(brokerUrl);
         activeMQConnectionFactory.setUserName(user);
         activeMQConnectionFactory.setPassword(password);
-        activeMQConnectionFactory.setTrustedPackages(Collections.singletonList("com.volvocars.conncar.telematics"));
+        activeMQConnectionFactory.setTrustedPackages(Collections.singletonList("com.rama.artemis"));
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(activeMQConnectionFactory);
         cachingConnectionFactory.setSessionCacheSize(sessionCacheSize);
         return cachingConnectionFactory;
